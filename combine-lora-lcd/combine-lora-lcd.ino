@@ -1,7 +1,9 @@
 #include <SPI.h>
 #include <LoRa.h>
 
-
+#include <SoftwareSerial.h> 
+#include <TinyGPS.h> 
+float lat = 28.5458,lon = 77.1703; // create variable for latitude and longitude object  
 
 #include <LiquidCrystal.h>
 //LCD pin to Arduino
@@ -15,7 +17,8 @@ const int pin_d7 = 3;
 LiquidCrystal lcd( pin_RS,  pin_EN,  pin_d4,  pin_d5,  pin_d6,  pin_d7);
 
 
-
+SoftwareSerial gpsSerial(A1,A2);//rx,tx 
+TinyGPS gps; // create gps object 
 
 
 int counter = 0;
@@ -69,6 +72,7 @@ byte i=0;
 //      Serial.print((char)LoRa.read());
       i++;
     }
+    lcd.clear(); 
     lcd.setCursor(0,0);
     lcd.print("Message: ");
     lcd.print(str);
@@ -102,7 +106,59 @@ byte i=0;
 //
 //  delay(1000);
 
+
+
+
+
+
+while(gpsSerial.available()){ // check for gps data 
+//  Serial.println("gps data");
+  if(gps.encode(gpsSerial.read()))// encode gps data 
+  {  
+  gps.f_get_position(&lat,&lon); // get latitude and longitude 
+  // display position 
+//  lcd.clear(); 
+//  lcd.setCursor(1,0); 
+//  lcd.print("GPS Signal"); 
+//  Serial.print("Position: "); 
+//  Serial.print("Latitude:"); 
+//  Serial.print(lat,6); 
+//  Serial.print(";"); 
+//  Serial.print("Longitude:"); 
+//  Serial.println(lon,6);  
+//  lcd.setCursor(1,0); 
+//  lcd.print("LAT:"); 
+//  lcd.setCursor(5,0); 
+//  lcd.print(lat); 
+  //Serial.print(lat); 
+  //Serial.print(" "); 
+//  lcd.setCursor(0,1); 
+//  lcd.print(",LON:"); 
+//  lcd.setCursor(5,1); 
+//  lcd.print(lon); 
+ } 
 }
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
 
 
 
