@@ -9,8 +9,8 @@ float lat = 28.5458,lon = 77.1703; // create variable for latitude and longitude
 //LCD pin to Arduino
 const int pin_RS = 4; 
 const int pin_EN = 5; 
-const int pin_d4 = 0; 
-const int pin_d5 = 1; 
+const int pin_d4 = A3; 
+const int pin_d5 = A4; 
 const int pin_d6 = A5; 
 const int pin_d7 = 3; 
 
@@ -118,25 +118,25 @@ while(gpsSerial.available()){ // check for gps data
   {  
   gps.f_get_position(&lat,&lon); // get latitude and longitude 
   // display position 
-//  lcd.clear(); 
-//  lcd.setCursor(1,0); 
-//  lcd.print("GPS Signal"); 
+  lcd.clear(); 
+  lcd.setCursor(1,0); 
+  lcd.print("GPS Signal"); 
   Serial.print("Position: "); 
   Serial.print("Latitude:"); 
   Serial.print(lat,6); 
   Serial.print(";"); 
   Serial.print("Longitude:"); 
   Serial.println(lon,6);  
-//  lcd.setCursor(1,0); 
-//  lcd.print("LAT:"); 
-//  lcd.setCursor(5,0); 
-//  lcd.print(lat); 
+  lcd.setCursor(1,0); 
+  lcd.print("LAT:"); 
+  lcd.setCursor(5,0); 
+  lcd.print(lat); 
   //Serial.print(lat); 
   //Serial.print(" "); 
-//  lcd.setCursor(0,1); 
-//  lcd.print(",LON:"); 
-//  lcd.setCursor(5,1); 
-//  lcd.print(lon); 
+  lcd.setCursor(0,1); 
+  lcd.print(",LON:"); 
+  lcd.setCursor(5,1); 
+  lcd.print(lon); 
  } 
 }
 
