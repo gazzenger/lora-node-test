@@ -1,9 +1,19 @@
 #include <SPI.h>
 #include <LoRa.h>
 
+#include <SoftwareSerial.h> 
+#include <TinyGPS.h>
+float lat = 28.5458,lon = 77.1703; // create variable for latitude and longitude object   
+
+SoftwareSerial gpsSerial(A0,A1);//rx,tx 
+TinyGPS gps; // create gps object 
+
 int counter = 0;
 
 void setup() {
+
+  gpsSerial.begin(9600);
+  
   Serial.begin(9600);
   while (!Serial);
 
@@ -43,14 +53,15 @@ void loop() {
 //    Serial.println(LoRa.packetRssi());
 //  }
 
-
+while (gpsSerial.available() > 0)
+    Serial.write(gpsSerial.read());
 
   Serial.print("Sending packet: ");
   Serial.println(counter);
 
   // send packet
   LoRa.beginPacket();
-  LoRa.print("asdf ");
+  LoRa.print("asdf");
 //  LoRa.print(counter);
   LoRa.endPacket();
 

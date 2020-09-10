@@ -17,7 +17,7 @@ const int pin_d7 = 3;
 LiquidCrystal lcd( pin_RS,  pin_EN,  pin_d4,  pin_d5,  pin_d6,  pin_d7);
 
 
-SoftwareSerial gpsSerial(A1,A2);//rx,tx 
+SoftwareSerial gpsSerial(A2,A1);//rx,tx 
 TinyGPS gps; // create gps object 
 
 
@@ -32,12 +32,12 @@ void setup() {
 // lcd.print("Press Key:");
 
 
-
+  gpsSerial.begin(9600);
   
-//  Serial.begin(9600);
-//  while (!Serial);
+  Serial.begin(9600);
+  while (!Serial);
 //
-//  Serial.println("LoRa Receiver");
+  Serial.println("LoRa Receiver");
 
   pinMode(13, OUTPUT);
 
@@ -107,7 +107,8 @@ byte i=0;
 //  delay(1000);
 
 
-
+//while (gpsSerial.available() > 0)
+//    Serial.write(gpsSerial.read());
 
 
 
@@ -120,12 +121,12 @@ while(gpsSerial.available()){ // check for gps data
 //  lcd.clear(); 
 //  lcd.setCursor(1,0); 
 //  lcd.print("GPS Signal"); 
-//  Serial.print("Position: "); 
-//  Serial.print("Latitude:"); 
-//  Serial.print(lat,6); 
-//  Serial.print(";"); 
-//  Serial.print("Longitude:"); 
-//  Serial.println(lon,6);  
+  Serial.print("Position: "); 
+  Serial.print("Latitude:"); 
+  Serial.print(lat,6); 
+  Serial.print(";"); 
+  Serial.print("Longitude:"); 
+  Serial.println(lon,6);  
 //  lcd.setCursor(1,0); 
 //  lcd.print("LAT:"); 
 //  lcd.setCursor(5,0); 
