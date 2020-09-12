@@ -80,19 +80,19 @@ void loop() {
   // display position 
   Serial.print("Position: "); 
   Serial.print("Latitude:"); 
-  Serial.print(lat,6); 
+  Serial.print(lat,7); 
   Serial.print(";"); 
   Serial.print("Longitude:"); 
-  Serial.println(lon,6);  
+  Serial.println(lon,7);  
   Serial.println(elv,1);
   print_date(gps);  
 
 
 
   LoRa.beginPacket();
-  LoRa.print(lat,3);
+  LoRa.print(lat,5);
   LoRa.print(",");
-  LoRa.print(lon,3);
+  LoRa.print(lon,5);
   LoRa.print(",");
   LoRa.print(elv,1);
 //  LoRa.print(counter);
